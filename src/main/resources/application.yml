@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  session-timeout: 30
+  tomcat:
+    max-threads: 0
+    uri-encoding: utf-8
+
+#https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+#HTML文件中的/根路径也是基于下述static-locations
+
+
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 200MB
+  resources:
+    static-locations: classpath:/static/,classpath:/templates/
+  datasource:
+    url: jdbc:sqlserver://10.10.10.40:1433;DatabaseName=2018_IIT
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: Bofan
+    password: GT123456
+    #���ӳ�����
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      test-on-return: true
+      test-While-Idle: true
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      pool-prepared-statements: true
+      async-close-connection-enable: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall,config
+mybatis:
+  mapper-locations: classpath:Mapper/*.xml
+  type-aliases-package: com.centersoft.entity
+
+#pagehelper
+pagehelper:
+  helperDialect: sqlserver
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  returnPageInfo: check
+
+#logging:
+#  file: mtgg.log
+#  level: debug

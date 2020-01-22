@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>发票搜索</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-table.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-table.js"></script>
+
+    <!--
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/css/bootstrap-table.css">
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-table.js"></script>
+    <script src="/js/locale/bootstrap-table-zh-CN.min.js"></script>
+    -->
+    <!--
+    <script src="/js/extensions/export/bootstrap-table-export.min.js"></script>
+    -->
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="page-header">
+            <h1>Searching invoice information
+            </h1>
+        </div>
+    </div>
+
+
+    <div>
+
+        <form role="form" id="searchForm" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-3">
+                    <label for="invoicecode" class="control-label small">发票代码</label>
+                </div>
+                <div class="col-3">
+                    <label for="invoicenum" class="control-label small">发票号</label>
+                </div>
+                <div class="col-3">
+                    <label for="invoicedate" class="control-label small">开票日期</label>
+                </div>
+                <div class="col-3">
+                    <label for="checkcode" class="control-label small">校验码后6位</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <input type="text" class="input-mini" id="invoicecode" name="invoicecode" placeholder="请输入发票代码">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="input-mini" id="invoicenum" name="invoicenum" placeholder="请输入发票号">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="input-mini" id="invoicedate" name="invoicedate" placeholder="请输入开票日期">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="input-mini" id="checkcode" name="checkcode" placeholder="请输入校验码后6位">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-offset-10">
+                    <button type="button" class="btn-mini btn-info" data-toggle="collapse"
+                            data-target="#searchdetailForm" id="unfold">
+                        展开更多选项
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="collapse in" id="searchdetailForm" >
+            <form role="form" class="form-horizontal" enctype="multipart/form-data">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label small" for="totalamount">发票总金额</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="purchasertaxid">购买方税号</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="purchasername">购买方名称</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="purchaseraddrtel">购买方地址/电话</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="totalamount" name="totalamount" placeholder="请输入发票总金额">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="purchasertaxid" name="purchasertaxid" placeholder="请输入购买方税号">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="purchasername" name="purchasername" placeholder="请输入购买方名称">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="purchaseraddrtel" name="purchaseraddrtel" placeholder="请输入购买方地址/电话">
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label small" for="purchaserbank">购买方开户行及账号</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="sellertaxid">销售方税号</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="sellername">销售方名称</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="selleraddrtel">销售方地址/电话</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="purchaserbank" name="purchaserbank" placeholder="请输入购买方开户行及账号">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="sellertaxid" name="sellertaxid" placeholder="请输入销售方税号">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="sellername" name="sellername" placeholder="请输入销售方名称">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="selleraddrtel" name="selleraddrtel" placeholder="请输入销售方地址/电话">
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="control-label small" for="sellerbank">销售方开户行及账号</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="detailitems">明细项目内容</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="detailamountmoney">明细金额</label>
+                        </div>
+                        <div class="col-3">
+                            <label class="control-label small" for="detailtaxrate">明细税率</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="sellerbank" name="sellerbank" placeholder="请输入销售方开户行及账号">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="detailitems" name="detailitems" placeholder="请输入明细内容">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="detailamountmoney" name="detailamountmoney" placeholder="请输入明细金额">
+                        </div>
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="detailtaxrate" name="detailtaxrate" placeholder="请输入明细税率">
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-3">
+                            <label class="control-label small" for="detailtax">明细税额</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-3">
+                            <input type="text" class="input-mini" id="detailtax" name="detailtax" placeholder="请输入明细税额">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+        <div class="form-group">
+            <button type="button" id="searchBtn" class="btn-dark btn-primary btn-lg">搜索</button>
+        </div>
+
+        <!--列表展示-->
+        <div class="table-responsive" id="listDiv">
+            <table class="table table-striped table-hover" id="invoicetable">
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        //调用函数，初始化表格
+
+        var oTable = new TableInit();
+        oTable.Init();
+
+        //初始化Button的点击事件
+        //var oButtonInit = new ButtonInit();
+        //oButtonInit.Init();
+
+        $('#searchdetailForm').collapse();
+        $("#searchBtn").click(function() {
+            var invoicenum = $("#invoicenum").val();
+            var invoicecode = $("#invoicecode").val();
+            var invoicedate = $("#invoicedate").val();
+            var checkcode= $("#checkcode").val();
+            var totalamount = $("#totalamount").val();
+            var purchasertaxid = $("#purchasertaxid").val();
+            var purchasername = $("#purchasername").val();
+            var purchaseraddrtel = $("#purchaseraddrtel").val();
+            var purchaserbank = $("#purchaserbank").val();
+            var sellertaxid= $("#sellertaxid").val();
+            var sellername = $("#sellername").val();
+            var selleraddrtel = $("#selleraddrtel").val();
+            var sellerbank = $("#sellerbank").val();
+            var detailitems= $("#detailitems").val();
+            var detailamountmoney = $("#detailamountmoney").val();
+            var detailtaxrate= $("#detailtaxrate").val();
+            var detailtax = $("#detailtax").val();
+            var urlStr = '/do.search_invoice';
+
+            $.ajax({
+                type: "get",
+                url:urlStr,
+                data: {invoicenum : invoicenum,
+                    invoicecode : invoicecode,
+                    invoicedate : invoicedate,
+                    checkcode: checkcode,
+                    totalamount : totalamount,
+                    purchasertaxid : purchasertaxid,
+                    purchasername : purchasername,
+                    purchaseraddrtel : purchaseraddrtel,
+                    purchaserbank : purchaserbank,
+                    sellertaxid: sellertaxid,
+                    sellername : sellername,
+                    selleraddrtel : selleraddrtel,
+                    sellerbank : sellerbank,
+                    detailitems: detailitems,
+                    detailamountmoney : detailamountmoney,
+                    detailtaxrate: detailtaxrate,
+                    detailtax : detailtax},
+                dataType:"json",
+                success : function(json) {
+                    $("#invoicetable").bootstrapTable('load', json);//主要是要这种写法
+                }
+            });
+
+        });
+    });
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        oTableInit.Init = function () {
+            var invoicenum = $("#invoicenum").val();
+            var invoicecode = $("#invoicecode").val();
+            var invoicedate = $("#invoicedate").val();
+            var checkcode= $("#checkcode").val();
+            var totalamount = $("#totalamount").val();
+            var purchasertaxid = $("#purchasertaxid").val();
+            var purchasername = $("#purchasername").val();
+            var purchaseraddrtel = $("#purchaseraddrtel").val();
+            var purchaserbank = $("#purchaserbank").val();
+            var sellertaxid= $("#sellertaxid").val();
+            var sellername = $("#sellername").val();
+            var selleraddrtel = $("#selleraddrtel").val();
+            var sellerbank = $("#sellerbank").val();
+            var detailitems= $("#detailitems").val();
+            var detailamountmoney = $("#detailamountmoney").val();
+            var detailtaxrate= $("#detailtaxrate").val();
+            var detailtax = $("#detailtax").val();
+            var urlStr = '/do.search_invoice';
+            $('#invoicetable').bootstrapTable('destroy').bootstrapTable({
+                url: urlStr,         //请求后台的URL（*）
+                method: 'get', //请求方式（*）
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                sortable: true,                     //是否启用排序
+                sortOrder: "desc",                   //排序方式
+                //queryParams: oTableInit.queryParams,//传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 10,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                strictSearch: true,
+                clickToSelect: true,                //是否启用点击选中行
+                height: 460,
+                //uniqueId: ["invoice_Code","invoice_Num"],                     //每一行的唯一标识，一般为主键列
+                cardView: false,                    //是否显示详细视图
+                detailView: true,
+                checkboxHeader: true,
+                search: false,
+                singleSelect: true,
+                showColumns: false,  // 开启自定义列显示功能
+                columns: [{
+                    checkbox : true
+                }, {
+                    field: 'invoice_Code',
+                    title: '发票代码'
+                }, {
+                    field: 'invoice_Num',
+                    title: '发票号'
+                }, {
+                    field: 'check_Code',
+                    title: '校验码'
+                }, {
+                    field: 'invoice_Date',
+                    title: '日期'
+                },  {
+                    field: 'purchaser_Name',
+                    title: '购买方名称'
+                },  {
+                    field: 'purchaser_Tax_Id',
+                    title: '购买方税号'
+                },  {
+                    field: 'purchaser_Add_Tel',
+                    title: '购买方地址、电话'
+                },  {
+                    field: 'purchaser_Bank',
+                    title: '购买方开户行及账号'
+                },  {
+                    field: 'seller_Name',
+                    title: '销售方名称'
+                },  {
+                    field: 'seller_Tax_Id',
+                    title: '销售方税号'
+                },  {
+                    field: 'seller_Add_Tel',
+                    title: '销售方地址、电话'
+                },  {
+                    field: 'seller_Bank',
+                    title: '销售方开户行及账号'
+                },  {
+                    field: 'total_Amount',
+                    title: '发票金额'
+                },  {
+                    field: 'image_Path',
+                    title: '图片文件名'
+                },  {
+                    title: '操作',
+                    align: 'center',
+                    formatter:function(value,row,index){
+                        var e = '<button type="button" id="invoiceupdate'+index+'" class="btn btn-primary" onclick="updateFun(\''+ index +'\')">修改</button>';
+                        var d = '<button type="button" id="invoicedelete'+index+'" class="btn btn-danger" onclick="deleteFun(\''+ index +'\')">删除</button>';
+                        return e+d;
+                    }
+                }
+                ],
+                onExpandRow: function (index, row, $detail) {
+                    oTableInit.InitSubTable(index, row, $detail);
+                }
+            });
+            //$('#invoicetable').bootstrapTable('hideColumn', 'image_Path');
+            detailediting.editing=false;
+            //detailediting.editinginvoicerow=0;
+            //detailediting.editingdetailrow=0;
+        };
+
+
+        oTableInit.InitSubTable = function (invoiceindex, invoicerow, $detail) {
+            var invoicecode = invoicerow.invoice_Code;
+            var invoicenum = invoicerow.invoice_Num;
+            var checkcode = invoicerow.check_Code;
+            var invoicedate = invoicerow.invoice_Date;
+
+            var cur_table = $detail.html('<table></table>').find('table');
+            $(cur_table).bootstrapTable({
+                url: '/do.search_detail',
+                method: 'get',
+                queryParams: {  invoicenum : invoicenum,
+                                invoicecode : invoicecode,
+                                invoicedate : invoicedate,
+                                checkcode: checkcode},
+                ajaxOptions: {  invoicenum : invoicenum,
+                                invoicecode : invoicecode,
+                                invoicedate : invoicedate,
+                                checkcode: checkcode },
+                clickToSelect: true,
+                detailView: false,//父子表
+                pageSize: 10,
+                pageList: [10, 25],
+                columns: [{
+                    checkbox: false
+                }, {
+                    field: 'detail_Item',
+                    title: '明细项目名称'
+                }, {
+                    field: 'detail_Amount',
+                    title: '明细金额'
+                }, {
+                    field: 'detail_Tax_Rate',
+                    title: '税率'
+                }, {
+                    field: 'detail_Tax',
+                    title: '税额'
+                }, {
+                    title:'操作',
+                    align: 'center',
+                    formatter:function(value,row,index){
+                        if(!detailediting.editing){
+                            var e = '<button type="button" id="detailupdate'+invoiceindex+'_'+index+'" class="btn btn-primary" onclick="detailUpdateFun(\''+invoiceindex+'\',\''+ index +'\')">修改</button>';
+                            var d = '<button type="button" id="detaildelete'+invoiceindex+'_'+index+'" class="btn btn-danger" onclick="detailDeleteFun(\''+invoiceindex+'\',\''+ index +'\')">删除</button>';
+                            return e+d;
+                        }
+                        else{
+                            //var e = '<button type="button" id="detailupdate'+invoiceindex+'_'+index+'" class="btn btn-primary" onclick="DetailCancelUpdate(\''+detailediting.editinginvoicerow+'\',\''+ detailediting.editingdetailrow +'\')">修改</button>';
+                            var d = '<button type="button" id="detaildelete'+invoiceindex+'_'+index+'" class="btn btn-danger" onclick="detailDeleteFun(\''+invoiceindex+'\',\''+ index +'\')">删除</button>';
+                            return d;
+                        }
+
+                    }
+
+                }]
+
+            });
+
+        };
+
+        return oTableInit;
+    };
+    var detailediting = new Object();
+
+    var detailUpdateFun =function(invoicerow,detailrow){
+
+        getOriginalDetailData(invoicerow,detailrow);
+        var invoiceElement = $("#invoicetable").children("tbody").children("tr[data-index='"+invoicerow+"']");
+        var detailElement = invoiceElement.next().find("tr[data-index='"+detailrow+"']");
+        ChangeTdToInput(detailElement,1,'detailitemupdateinput');
+        ChangeTdToInput(detailElement,2,'detailamountupdateinput');
+        ChangeTdToInput(detailElement,3,'detailtaxrateupdateinput');
+        ChangeTdToInput(detailElement,4,'detailtaxupdateinput');
+
+        var detailbutton1=detailElement.find('button[class~="btn-primary"]');
+        var detailbutton2=detailElement.find('button[class~="btn-danger"]');
+        detailbutton1.removeAttr('onclick');
+        detailbutton2.removeAttr('onclick');
+        detailbutton1.html("确认");
+        detailbutton1.removeClass("btn-primary");
+        detailbutton1.addClass("btn-success");
+        detailbutton2.html("取消");
+        detailbutton2.removeClass("btn-danger");
+        detailbutton2.addClass("btn-warning");
+        detailbutton1.attr('onclick','DetailSubmitUpdate('+invoicerow+','+detailrow+');');
+        detailbutton2.attr('onclick','DetailCancelUpdate('+invoicerow+','+detailrow+');');
+        $('button[id!="detailupdate'+invoicerow+'_'+detailrow+'"][id*="detailupdate"]').hide();
+        $('button[id!="detailupdate'+invoicerow+'_'+detailrow+'"][id*="detailupdate"]').hide();
+        detailediting.editing=true;
+        //detailediting.editinginvoicerow=invoicerow;
+        //detailediting.editingdetailrow=detailrow;
+        //$('button[id!="detailupdate'+invoicerow+'_'+detailrow+'"][id*="detailupdate"]').hide();
+
+    }
+
+    var detailDeleteFun = function(invoicerow,detailrow){
+        if(confirm("是否确定要删除？")==true){
+            getOriginalDetailData(invoicerow,detailrow);
+            var invoiceElement = $("#invoicetable").children("tbody").children("tr[data-index='"+invoicerow+"']");
+            var detailElement = invoiceElement.next().find("tr[data-index='"+detailrow+"']");
+            var deleteurl='/do.delete_detail';
+            $.ajax({
+                type: "get",
+                url: deleteurl,
+                data: {
+                    invoicenum: originaldetaildata.invoicenum,
+                    invoicecode: originaldetaildata.invoicecode,
+                    invoicedate: originaldetaildata.invoicedate,
+                    checkcode: originaldetaildata.checkcode,
+                    totalamount: originaldetaildata.totalamount,
+                    purchasertaxid: originaldetaildata.purchasertaxid,
+                    purchasername: originaldetaildata.purchasername,
+                    purchaseraddrtel: originaldetaildata.purchaseraddrtel,
+                    purchaserbank: originaldetaildata.purchaserbank,
+                    sellertaxid: originaldetaildata.sellertaxid,
+                    sellername: originaldetaildata.sellername,
+                    selleraddrtel: originaldetaildata.selleraddrtel,
+                    sellerbank: originaldetaildata.sellerbank,
+                    imagepath: originaldetaildata.imagepath,
+                    detailitem:originaldetaildata.detailitem,
+                    detailamount:originaldetaildata.detailamount,
+                    detailtaxrate:originaldetaildata.detailtaxrate,
+                    detailtax:originaldetaildata.detailtax
+                },
+                dataType: "json",
+                success: function (json) {
+                    if(json.status=="success")
+                        $("#invoicetable")
+                            .children("tbody")
+                            .children("tr[data-index='"+invoicerow+"']").next()
+                            .find('table')
+                            .bootstrapTable('refresh');
+                    else
+                        alert('删除失败');
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+
+                    //$("#invoicetable").bootstrapTable('hideRow', {index:row});
+                    alert(textStatus);
+                }
+            })
+        }
+
+
+    };
+    var DetailCancelUpdate = function(invoicerow,detailrow){
+
+        var invoiceElement = $("#invoicetable").children("tbody").children("tr[data-index='"+invoicerow+"']");
+        //var detailElement = invoiceElement.next().find("tr[data-index='"+detailrow+"']");
+
+        var detailElement = invoiceElement.next().find("tr[data-index='"+detailrow+"']");
+        ChangeDetailInputToTr(detailElement);
+        var button1=detailElement.find('button[class~="btn-success"]');
+        var button2=detailElement.find('button[class~="btn-warning"]');
+        button1.removeAttr('onclick');
+        button2.removeAttr('onclick');
+        button1.html("修改");
+        button1.removeClass("btn-success");
+        button1.addClass("btn-primary");
+        button2.html("删除");
+        button2.removeClass("btn-warning");
+        button2.addClass("btn-danger");
+        button1.attr('onclick','detailUpdateFun('+invoicerow+','+detailrow+');');
+        button2.attr('onclick','detailDeleteFun('+invoicerow+','+detailrow+');');
+        $('button[id!="detailupdate'+invoicerow+'_'+detailrow+'"][id*="detailupdate"]').show();
+        $('button[id!="detailupdate'+invoicerow+'_'+detailrow+'"][id*="detailupdate"]').show();
+        detailediting.editing=false;
+        //detailediting.editinginvoicerow=0;
+        //detailediting.editingdetailrow=0;
+    };
+
+    var DetailSubmitUpdate = function(invoicerow,detailrow){
+        if(confirm("确定提交数据?")) {
+            detailediting.editing=false;
+            //alert(originaldata.originalcheckcode)
+            var detailitem = $("#detailitemupdateinput").val();
+            var detailamount = $("#detailamountupdateinput").val();
+            var detailtaxrate = $("#detailtaxrateupdateinput").val();
+            var detailtax= $("#detailtaxupdateinput").val();
+            var urlStr = '/do.update_detail';
+            //alert('originaldata.originalinvoicenum');
+            $.ajax({
+                type: "get",
+                url:urlStr,
+                data: { invoicenum:originaldetaildata.invoicenum,
+                        invoicecode:originaldetaildata.invoicecode,
+                        invoicedate:originaldetaildata.invoicedate,
+                        checkcode:originaldetaildata.checkcode,
+                        totalamount:originaldetaildata.totalamount,
+                        purchasertaxid:originaldetaildata.purchasertaxid,
+                        purchasername:originaldetaildata.purchasername,
+                        purchaseraddrtel:originaldetaildata.purchaseraddrtel,
+                        purchaserbank:originaldetaildata.purchaserbank,
+                        sellertaxid:originaldetaildata.sellertaxid,
+                        sellername:originaldetaildata.sellername,
+                        selleraddrtel:originaldetaildata.selleraddrtel,
+                        sellerbank:originaldetaildata.sellerbank,
+                        imagepath:originaldetaildata.imagepath,
+                        originaldetailitem:originaldetaildata.detailitem,
+                        originaldetailamount:originaldetaildata.detailamount,
+                        originaldetailtaxrate:originaldetaildata.detailtaxrate,
+                        originaldetailtax:originaldetaildata.detailtax,
+                        detailitem:detailitem,
+                        detailamount:detailamount,
+                        detailtaxrate:detailtaxrate,
+                        detailtax:detailtax
+                    },
+                dataType:"json",
+                success : function(json) {
+                    detailediting.editing=false;
+                    $("#invoicetable")
+                        .children("tbody")
+                        .children("tr[data-index='"+invoicerow+"']").next()
+                        .find('table').bootstrapTable('refresh');
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+
+                    alert(textStatus);
+                }
+            });
+        }
+    };
+
+    var ChangeTdToInput = function(element,index,idname){
+        var domElement = element.children('td').get(index);
+        var $jqueryElement=$(domElement);
+        var datainside = $jqueryElement.html();
+        if(datainside==='-'){
+            datainside='';
+        }
+        var height=$jqueryElement.css('height');
+        var width=$jqueryElement.css('width');
+        $jqueryElement.css('padding-bottom','0px');
+        $jqueryElement.css('padding-left','0px');
+        $jqueryElement.css('padding-right','0px');
+        $jqueryElement.css('padding-top','0px');
+        $jqueryElement.html('<textarea id="'
+            +idname+'" type="text" style="width: '+width+'">'+datainside+'</textarea>');
+        //$jqueryElement.html('<textarea id="'
+        //    +idname+'" type="text" style="height: 100%;width: 100%">'+datainside+'</textarea>');
+    };
+
+    var ChangeInputToTr = function(element){
+        var domElementcancel = element.children('td').get(3);
+        var $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalinvoicenum===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalinvoicenum);
+        }
+
+        domElementcancel = element.children('td').get(2);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalinvoicecode===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalinvoicecode);
+        }
+
+        domElementcancel = element.children('td').get(5);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalinvoicedate===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalinvoicedate);
+        }
+
+        domElementcancel = element.children('td').get(4);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalcheckcode===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalcheckcode);
+        }
+
+        domElementcancel = element.children('td').get(14);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originaltotalamount===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originaltotalamount);
+        }
+
+        domElementcancel = element.children('td').get(7);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalpurchasertaxid===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalpurchasertaxid);
+        }
+
+        domElementcancel = element.children('td').get(6);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalpurchasername===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalpurchasername);
+        }
+
+        domElementcancel = element.children('td').get(8);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalpurchaseraddrtel===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalpurchaseraddrtel);
+        }
+
+        domElementcancel = element.children('td').get(9);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalpurchaserbank===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalpurchaserbank);
+        }
+
+        domElementcancel = element.children('td').get(11);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalsellertaxid===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalsellertaxid);
+        }
+
+        domElementcancel = element.children('td').get(10);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalsellername===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalsellername);
+        }
+
+        domElementcancel = element.children('td').get(12);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalselleraddrtel===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalselleraddrtel);
+        }
+
+        domElementcancel = element.children('td').get(13);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldata.originalsellerbank===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldata.originalsellerbank);
+        }
+
+    };
+
+    var ChangeDetailInputToTr = function(element){
+        var domElementcancel = element.children('td').get(1);
+        var $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldetaildata.detailitem===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldetaildata.detailitem);
+        }
+
+
+        domElementcancel = element.children('td').get(2);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldetaildata.detailamount===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldetaildata.detailamount);
+        }
+
+        domElementcancel = element.children('td').get(3);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldetaildata.detailtaxrate===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldetaildata.detailtaxrate);
+        }
+
+
+
+        domElementcancel = element.children('td').get(4);
+        $jqueryElementCancel=$(domElementcancel);
+        $jqueryElementCancel.css('padding-bottom','8px');
+        $jqueryElementCancel.css('padding-left','8px');
+        $jqueryElementCancel.css('padding-right','8px');
+        $jqueryElementCancel.css('padding-top','8px');
+        if(originaldetaildata.detailtax===''){
+            $jqueryElementCancel.html('-');
+        }
+        else{
+            $jqueryElementCancel.html(originaldetaildata.detailtax);
+        }
+    };
+
+    var originaldata = new Object();
+
+    var originaldetaildata = new Object();
+
+    var getOriginalData = function(element,row){
+
+        var Original=$("#invoicetable").bootstrapTable('getData')[row];
+
+        //alert(Original.purchaser_Bank);
+        //alert(Original.purchaser_Name);
+        originaldata.originalinvoicenum=typeof(Original.invoice_Num)
+        =="undefined"?'':Original.invoice_Num;
+        originaldata.originalinvoicecode=typeof(Original.invoice_Code)
+        =='undefined'?'':Original.invoice_Code;
+        originaldata.originalinvoicedate=typeof(Original.invoice_Date)
+		=='undefined'?'':Original.invoice_Date;
+        originaldata.originalcheckcode=typeof(Original.check_Code)
+		=='undefined'?'':Original.check_Code;
+        originaldata.originaltotalamount=typeof(Original.total_Amount)
+		=='undefined'?'':Original.total_Amount;
+        originaldata.originalpurchasertaxid=typeof(Original.purchaser_Tax_Id)
+		=='undefined'?'':Original.purchaser_Tax_Id;
+        originaldata.originalpurchasername=typeof(Original.purchaser_Name)
+		=='undefined'?'':Original.purchaser_Name;
+        originaldata.originalpurchaseraddrtel=typeof(Original.purchaser_Add_Tel)
+		=='undefined'?'':Original.purchaser_Add_Tel;
+        originaldata.originalpurchaserbank=typeof(Original.purchaser_Bank)
+		=='undefined'?'':Original.purchaser_Bank;
+        originaldata.originalsellertaxid=typeof(Original.seller_Tax_Id)
+		=='undefined'?'':Original.seller_Tax_Id;
+        originaldata.originalsellername=typeof(Original.seller_Name)
+		=='undefined'?'':Original.seller_Name;
+        originaldata.originalselleraddrtel=typeof(Original.seller_Add_Tel)
+		=='undefined'?'':Original.seller_Add_Tel;
+        originaldata.originalsellerbank=typeof(Original.seller_Bank)
+		=='undefined'?'':Original.seller_Bank;
+        originaldata.originalimagepath=typeof(Original.image_Path)
+        =='undefined'?'':Original.image_Path;
+    };
+
+    var getOriginalDetailData = function(invoicerow,detailrow){
+
+        var Originalinvoice=$("#invoicetable").bootstrapTable('getData')[invoicerow];
+
+        originaldetaildata.invoicenum=typeof(Originalinvoice.invoice_Num)
+        =="undefined"?'':Originalinvoice.invoice_Num;
+        originaldetaildata.invoicecode=typeof(Originalinvoice.invoice_Code)
+        =='undefined'?'':Originalinvoice.invoice_Code;
+        originaldetaildata.invoicedate=typeof(Originalinvoice.invoice_Date)
+        =='undefined'?'':Originalinvoice.invoice_Date;
+        originaldetaildata.checkcode=typeof(Originalinvoice.check_Code)
+        =='undefined'?'':Originalinvoice.check_Code;
+        originaldetaildata.totalamount=typeof(Originalinvoice.total_Amount)
+        =='undefined'?'':Originalinvoice.total_Amount;
+        originaldetaildata.purchasertaxid=typeof(Originalinvoice.purchaser_Tax_Id)
+        =='undefined'?'':Originalinvoice.purchaser_Tax_Id;
+        originaldetaildata.purchasername=typeof(Originalinvoice.purchaser_Name)
+        =='undefined'?'':Originalinvoice.purchaser_Name;
+        originaldetaildata.purchaseraddrtel=typeof(Originalinvoice.purchaser_Add_Tel)
+        =='undefined'?'':Originalinvoice.purchaser_Add_Tel;
+        originaldetaildata.purchaserbank=typeof(Originalinvoice.purchaser_Bank)
+        =='undefined'?'':Originalinvoice.purchaser_Bank;
+        originaldetaildata.sellertaxid=typeof(Originalinvoice.seller_Tax_Id)
+        =='undefined'?'':Originalinvoice.seller_Tax_Id;
+        originaldetaildata.sellername=typeof(Originalinvoice.seller_Name)
+        =='undefined'?'':Originalinvoice.seller_Name;
+        originaldetaildata.selleraddrtel=typeof(Originalinvoice.seller_Add_Tel)
+        =='undefined'?'':Originalinvoice.seller_Add_Tel;
+        originaldetaildata.sellerbank=typeof(Originalinvoice.seller_Bank)
+        =='undefined'?'':Originalinvoice.seller_Bank;
+        originaldetaildata.imagepath=typeof(Originalinvoice.image_Path)
+        =='undefined'?'':Originalinvoice.image_Path;
+
+        var Originaldetail=$("#invoicetable")
+            .children("tbody")
+            .children("tr[data-index='"+invoicerow+"']").next()
+            .find('table')
+            .bootstrapTable('getData')[detailrow];
+
+        originaldetaildata.detailitem=typeof(Originaldetail.detail_Item)
+        =='undefined'?'':Originaldetail.detail_Item;
+        originaldetaildata.detailamount=typeof(Originaldetail.detail_Amount)
+        =='undefined'?'':Originaldetail.detail_Amount;
+        originaldetaildata.detailtaxrate=typeof(Originaldetail.detail_Tax_Rate)
+        =='undefined'?'':Originaldetail.detail_Tax_Rate;
+        originaldetaildata.detailtax=typeof(Originaldetail.detail_Tax)
+        =='undefined'?'':Originaldetail.detail_Tax;
+
+    };
+
+    var deleteFun = function(row){
+        if(confirm("是否确定要删除？")==true){
+            var Element = $("#invoicetable").children("tbody").children("tr[data-index='"+row+"']");
+            getOriginalData(Element,row);
+            var deleteurl='/do.delete_invoice'
+            $.ajax({
+                type: "get",
+                url: deleteurl,
+                data: {
+                    invoicenum: originaldata.originalinvoicenum,
+                    invoicecode: originaldata.originalinvoicecode,
+                    invoicedate: originaldata.originalinvoicedate,
+                    checkcode: originaldata.originalcheckcode,
+                    totalamount: originaldata.originaltotalamount,
+                    purchasertaxid: originaldata.originalpurchasertaxid,
+                    purchasername: originaldata.originalpurchasername,
+                    purchaseraddrtel: originaldata.originalpurchaseraddrtel,
+                    purchaserbank: originaldata.originalpurchaserbank,
+                    sellertaxid: originaldata.originalsellertaxid,
+                    sellername: originaldata.originalsellername,
+                    selleraddrtel: originaldata.originalselleraddrtel,
+                    sellerbank: originaldata.originalsellerbank,
+                    imagepath: originaldata.originalimagepath
+
+                },
+                dataType: "json",
+                success: function (json) {
+                    if(json.status=="success")
+                        $("#invoicetable").bootstrapTable('refresh');
+                    else
+                        alert('删除失败');
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+
+                    //$("#invoicetable").bootstrapTable('hideRow', {index:row});
+                    alert(textStatus);
+                }
+            })
+        }
+
+
+    };
+
+    var updateFun =function(row){
+        //var element=getElementByAttr('tr','data-index',index);
+        var Element = $("#invoicetable").children("tbody").children("tr[data-index='"+row+"']");
+        //var Element=$("tr[data-index='"+row+"']");
+        //$("#invoicetable").bootstrapTable('expandRow', row);
+        getOriginalData(Element,row);
+        //alert (originaldata.originalpurchaseraddrtel);
+        ChangeTdToInput(Element,2,'invoicecodeupdateinput');
+        ChangeTdToInput(Element,3,'invoicenumupdateinput');
+        ChangeTdToInput(Element,4,'checkcodeupdateinput');
+        ChangeTdToInput(Element,5,'invoicedateupdateinput');
+        ChangeTdToInput(Element,6,'purchasernameupdateinput');
+        ChangeTdToInput(Element,7,'purchasertaxidupdateinput');
+        ChangeTdToInput(Element,8,'purchaseraddupdateinput');
+        ChangeTdToInput(Element,9,'purchaserbankupdateinput');
+        ChangeTdToInput(Element,10,'sellernameupdateinput');
+        ChangeTdToInput(Element,11,'sellertaxidupdateinput');
+        ChangeTdToInput(Element,12,'selleraddupdateinput');
+        ChangeTdToInput(Element,13,'sellerbankupdateinput');
+        ChangeTdToInput(Element,14,'totalamountupdateinput');
+
+
+        var button1=Element.find('button[class~="btn-primary"]');
+        var button2=Element.find('button[class~="btn-danger"]');
+        button1.removeAttr('onclick');
+        button2.removeAttr('onclick');
+        button1.html("确认");
+        button1.removeClass("btn-primary");
+        button1.addClass("btn-success");
+        button2.html("取消");
+        button2.removeClass("btn-danger");
+        button2.addClass("btn-warning");
+        button1.attr('onclick','SubmitUpdate('+row+');');
+        button2.attr('onclick','CancelUpdate('+row+');');
+        //var ss=$("#invoicetable").find('button[id!="invoicedelete'+row+'"]');
+        //alert(ss.length);
+        $('button[id!="invoicedelete'+row+'"][id*="invoicedelete"]').hide();
+        $('button[id!="invoiceupdate'+row+'"][id*="invoiceupdate"]').hide();
+        //$invoicecode.css('height',height);
+        //var width=$invoicecode.css('width',width);
+        //alert($invoicecode.css('height'));
+        //var rows = $('#invoicetable').bootstrapTable()
+    };
+
+    var CancelUpdate = function(row){
+        var Element = $("#invoicetable").children("tbody").children("tr[data-index='"+row+"']");
+        ChangeInputToTr(Element);
+        var button1=Element.find('button[class~="btn-success"]');
+        var button2=Element.find('button[class~="btn-warning"]');
+        button1.removeAttr('onclick');
+        button2.removeAttr('onclick');
+        button1.html("修改");
+        button1.removeClass("btn-success");
+        button1.addClass("btn-primary");
+        button2.html("删除");
+        button2.removeClass("btn-warning");
+        button2.addClass("btn-danger");
+        button1.attr('onclick','updateFun('+row+');');
+        button2.attr('onclick','deleteFun('+row+');');
+        $('button[id!="invoicedelete'+row+'"][id*="invoicedelete"]').show();
+        $('button[id!="invoiceupdate'+row+'"][id*="invoiceupdate"]').show();
+    };
+
+    var SubmitUpdate = function(row){
+        if(confirm("确定提交数据?")) {
+            //alert(originaldata.originalcheckcode)
+            var invoicenum = $("#invoicenumupdateinput").val();
+            var invoicecode = $("#invoicecodeupdateinput").val();
+            var invoicedate = $("#invoicedateupdateinput").val();
+            var checkcode= $("#checkcodeupdateinput").val();
+            var totalamount = $("#totalamountupdateinput").val();
+            var purchasertaxid = $("#purchasertaxidupdateinput").val();
+            var purchasername = $("#purchasernameupdateinput").val();
+            var purchaseraddrtel = $("#purchaseraddupdateinput").val();
+            var purchaserbank = $("#purchaserbankupdateinput").val();
+            var sellertaxid= $("#sellertaxidupdateinput").val();
+            var sellername = $("#sellernameupdateinput").val();
+            var selleraddrtel = $("#selleraddupdateinput").val();
+            var sellerbank = $("#sellerbankupdateinput").val();
+
+            var urlStr = '/do.update_invoice';
+            //alert('originaldata.originalinvoicenum');
+            $.ajax({
+                type: "get",
+                url:urlStr,
+                data: {
+                    originalinvoicenum : originaldata.originalinvoicenum,
+                    originalinvoicecode : originaldata.originalinvoicecode,
+                    originalinvoicedate : originaldata.originalinvoicedate,
+                    originalcheckcode : originaldata.originalcheckcode,
+                    originaltotalamount : originaldata.originaltotalamount,
+                    originalpurchasertaxid : originaldata.originalpurchasertaxid,
+                    originalpurchasername : originaldata.originalpurchasername,
+                    originalpurchaseraddrtel : originaldata.originalpurchaseraddrtel,
+                    originalpurchaserbank: originaldata.originalpurchaserbank,
+                    originalsellertaxid : originaldata.originalsellertaxid,
+                    originalsellername : originaldata.originalsellername,
+                    originalselleraddrtel : originaldata.originalselleraddrtel,
+                    originalsellerbank : originaldata.originalsellerbank,
+                    originalimagepath : originaldata.originalimagepath,
+                    invoicenum : invoicenum,
+                    invoicecode : invoicecode,
+                    invoicedate : invoicedate,
+                    checkcode: checkcode,
+                    totalamount : totalamount,
+                    purchasertaxid : purchasertaxid,
+                    purchasername : purchasername,
+                    purchaseraddrtel : purchaseraddrtel,
+                    purchaserbank : purchaserbank,
+                    sellertaxid: sellertaxid,
+                    sellername : sellername,
+                    selleraddrtel : selleraddrtel,
+                    sellerbank : sellerbank},
+                dataType:"json",
+                success : function(json) {
+                    /*$("#invoicetable").bootstrapTable('updateRow', {
+                        index: row,
+                        row: {
+                            invoice_Code: json[0].invoice_Code,
+                            invoice_Num: json[0].invoice_Num,
+                            check_Code: json[0].check_Code,
+                            invoice_Date: json[0].invoice_Date,
+                            purchaser_Name: json[0].purchaser_Name,
+                            purchaser_Tax_Id: json[0].purchaser_Tax_Id,
+                            purchaser_Add_Tel: json[0].purchaser_Add_Tel,
+                            purchaser_Bank: json[0].purchaser_Bank,
+                            seller_Name: json[0].seller_Name,
+                            seller_Tax_Id: json[0].seller_Tax_Id,
+                            seller_Add_Tel: json[0].seller_Add_Tel,
+                            seller_Bank: json[0].seller_Bank,
+                            total_Amount: json[0].total_Amount
+                        }
+                    });*/
+                    $("#invoicetable").bootstrapTable('refresh');
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+
+                    alert(textStatus);
+                }
+            });
+        }
+    };
+
+
+
+    var ButtonInit = function () {
+        var oInit = new Object();
+        var postdata = {};
+
+        oInit.Init = function () {
+
+            //初始化页面上面的按钮事件
+        };
+
+        return oInit;
+    };
+
+</script>
+</html>

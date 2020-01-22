@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatiscomponents.mapper.DetailMapper">
+
+	<!--
+	<resultMap id="AllInvoiceInfoResultMap" type="mybatiscomponents.beans.AllInvoiceInfo">
+        <id property="Invoice_Code" column="Invoice_Code"/>
+        <id property="Invoice_Num" column="Invoice_Num"/>
+        <id property="Invoice_Date" column="Invoice_Date"/>
+        <id property="Check_Code" column="Check_Code"/>
+		<id property="Purchaser_Name" column="Purchaser_Name"/>
+		<id property="Purchaser_Tax_Id" column="Purchaser_Tax_Id"/>
+		<id property="Purchaser_Add_Tel" column="Purchaser_Add_Tel"/>
+		<id property="Purchaser_Bank" column="Purchaser_Bank"/>
+		<id property="Seller_Name" column="Seller_Name"/>
+		<id property="Seller_Tax_Id" column="Seller_Tax_Id"/>
+		<id property="Seller_Add_Tel" column="Seller_Add_Tel"/>
+		<id property="Seller_Bank" column="Seller_Bank"/>
+        <id property="Total_Amount" column="Total_Amount"/>
+        <id property="Image_Path" column="Image_Path"/>
+
+
+        <collection property="details" ofType="mybatiscomponents.beans.Detail">
+            <id property="Detail_Item" column="Detail_Item"/>
+            <id property="Detail_Amount" column="Detail_Amount"/>
+            <id property="Detail_Tax_Rate" column="Detail_Tax_Rate"/>
+            <id property="Detail_Tax" column="Detail_Tax"/>
+        </collection>
+
+    </resultMap>
+	-->
+
+
+    <update id="update" parameterType="mybatiscomponents.beans.DetailUpdate">
+        IF EXISTS (
+        SELECT * FROM Invoice
+        WHERE
+        <if test="Invoice_Code!=null">Invoice_Code=#{Invoice_Code}</if>
+        <if test="Invoice_Code==null">Invoice_Code IS NULL</if>
+        <if test="Invoice_Num!=null">AND Invoice_Num=#{Invoice_Num}</if>
+        <if test="Invoice_Num==null">AND Invoice_Num IS NULL</if>
+        <if test="Invoice_Date!=null">AND Invoice_Date=#{Invoice_Date}</if>
+        <if test="Invoice_Date==null">AND Invoice_Date IS NULL</if>
+        <if test="Check_Code!=null">AND Check_Code=#{Check_Code}</if>
+        <if test="Check_Code==null">AND Check_Code IS NULL</if>
+        <if test="Purchaser_Name!=null">AND Purchaser_Name=#{Purchaser_Name}</if>
+        <if test="Purchaser_Name==null">AND Purchaser_Name IS NULL</if>
+        <if test="Purchaser_Tax_Id!=null">AND Purchaser_Tax_Id=#{Purchaser_Tax_Id}</if>
+        <if test="Purchaser_Tax_Id==null">AND Purchaser_Tax_Id IS NULL</if>
+        <if test="Purchaser_Add_Tel!=null">AND Purchaser_Add_Tel=#{Purchaser_Add_Tel}</if>
+        <if test="Purchaser_Add_Tel==null">AND Purchaser_Add_Tel IS NULL</if>
+        <if test="Purchaser_Bank!=null">AND Purchaser_Bank=#{Purchaser_Bank}</if>
+        <if test="Purchaser_Bank==null">AND Purchaser_Bank IS NULL</if>
+        <if test="Seller_Name!=null">AND Seller_Name=#{Seller_Name}</if>
+        <if test="Seller_Name==null">AND Seller_Name IS NULL</if>
+        <if test="Seller_Tax_Id!=null">AND Seller_Tax_Id=#{Seller_Tax_Id}</if>
+        <if test="Seller_Tax_Id==null">AND Seller_Tax_Id IS NULL</if>
+        <if test="Seller_Add_Tel!=null">AND Seller_Add_Tel=#{Seller_Add_Tel}</if>
+        <if test="Seller_Add_Tel==null">AND Seller_Add_Tel IS NULL</if>
+        <if test="Seller_Bank!=null">AND Seller_Bank=#{Seller_Bank}</if>
+        <if test="Seller_Bank==null">AND Seller_Bank IS NULL</if>
+        AND abs(Total_Amount-#{Total_Amount}) &lt; 0.01
+        <if test="Image_Path!=null">AND Image_Path=#{Image_Path}</if>
+        <if test="Image_Path==null">AND Image_Path IS NULL</if>
+        AND abs(Detail_Amount-#{OriginalDetail_Amount}) &lt; 0.01
+        AND abs(Detail_Tax_Rate-#{OriginalDetail_Taxrate}) &lt; 0.01
+        AND abs(Detail_Tax-#{OriginalDetail_Tax}) &lt; 0.01
+
+        <if test="OriginalDetail_Item!=null">AND Detail_Item=#{OriginalDetail_Item}</if>
+        <if test="OriginalDetail_Item==null">AND Detail_Item IS NULL</if>
+        )
+
+        UPDATE Invoice SET
+        Detail_Amount=#{Detail_Amount},
+        Detail_Tax_Rate=#{Detail_Taxrate},
+        Detail_Tax=#{Detail_Tax},
+        Detail_Item=#{Detail_Item}
+        WHERE
+        <if test="Invoice_Code!=null">Invoice_Code=#{Invoice_Code}</if>
+        <if test="Invoice_Code==null">Invoice_Code IS NULL</if>
+        <if test="Invoice_Num!=null">AND Invoice_Num=#{Invoice_Num}</if>
+        <if test="Invoice_Num==null">AND Invoice_Num IS NULL</if>
+        <if test="Invoice_Date!=null">AND Invoice_Date=#{Invoice_Date}</if>
+        <if test="Invoice_Date==null">AND Invoice_Date IS NULL</if>
+        <if test="Check_Code!=null">AND Check_Code=#{Check_Code}</if>
+        <if test="Check_Code==null">AND Check_Code IS NULL</if>
+        <if test="Purchaser_Name!=null">AND Purchaser_Name=#{Purchaser_Name}</if>
+        <if test="Purchaser_Name==null">AND Purchaser_Name IS NULL</if>
+        <if test="Purchaser_Tax_Id!=null">AND Purchaser_Tax_Id=#{Purchaser_Tax_Id}</if>
+        <if test="Purchaser_Tax_Id==null">AND Purchaser_Tax_Id IS NULL</if>
+        <if test="Purchaser_Add_Tel!=null">AND Purchaser_Add_Tel=#{Purchaser_Add_Tel}</if>
+        <if test="Purchaser_Add_Tel==null">AND Purchaser_Add_Tel IS NULL</if>
+        <if test="Purchaser_Bank!=null">AND Purchaser_Bank=#{Purchaser_Bank}</if>
+        <if test="Purchaser_Bank==null">AND Purchaser_Bank IS NULL</if>
+        <if test="Seller_Name!=null">AND Seller_Name=#{Seller_Name}</if>
+        <if test="Seller_Name==null">AND Seller_Name IS NULL</if>
+        <if test="Seller_Tax_Id!=null">AND Seller_Tax_Id=#{Seller_Tax_Id}</if>
+        <if test="Seller_Tax_Id==null">AND Seller_Tax_Id IS NULL</if>
+        <if test="Seller_Add_Tel!=null">AND Seller_Add_Tel=#{Seller_Add_Tel}</if>
+        <if test="Seller_Add_Tel==null">AND Seller_Add_Tel IS NULL</if>
+        <if test="Seller_Bank!=null">AND Seller_Bank=#{Seller_Bank}</if>
+        <if test="Seller_Bank==null">AND Seller_Bank IS NULL</if>
+        AND abs(Total_Amount-#{Total_Amount}) &lt; 0.01
+        <if test="Image_Path!=null">AND Image_Path=#{Image_Path}</if>
+        <if test="Image_Path==null">AND Image_Path IS NULL</if>
+        AND abs(Detail_Amount-#{OriginalDetail_Amount}) &lt; 0.01
+        AND abs(Detail_Tax_Rate-#{OriginalDetail_Taxrate}) &lt; 0.01
+        AND abs(Detail_Tax-#{OriginalDetail_Tax}) &lt; 0.01
+
+        <if test="OriginalDetail_Item!=null">AND Detail_Item=#{OriginalDetail_Item}</if>
+        <if test="OriginalDetail_Item==null">AND Detail_Item IS NULL</if>
+        ELSE
+        INSERT INTO Invoice(Invoice_Code,
+        Invoice_Num,
+        Invoice_Date,
+        Check_Code,
+        Purchaser_Name,
+        Purchaser_Tax_Id,
+        Purchaser_Add_Tel,
+        Purchaser_Bank,
+        Seller_Name,
+        Seller_Tax_Id,
+        Seller_Add_Tel,
+        Seller_Bank,
+        Total_Amount,
+        Image_Path,
+        Detail_Amount,
+        Detail_Tax_Rate,
+        Detail_Tax,
+        Detail_Item)
+        VALUES
+        (#{Invoice_Code},
+        #{Invoice_Num},
+        #{Invoice_Date},
+        #{Check_Code},
+        #{Purchaser_Name},
+        #{Purchaser_Tax_Id},
+        #{Purchaser_Add_Tel},
+        #{Purchaser_Bank},
+        #{Seller_Name},
+        #{Seller_Tax_Id},
+        #{Seller_Add_Tel},
+        #{Seller_Bank},
+        #{Total_Amount},
+        #{Image_Path},
+        #{Detail_Amount},
+        #{Detail_Taxrate},
+        #{Detail_Tax},
+        #{Detail_Item});
+
+    </update>
+
+    <delete id="delete" parameterType="mybatiscomponents.beans.Invoice">
+        DELETE FROM Invoice
+        WHERE
+        <if test="Invoice_Code!=null">Invoice_Code=#{Invoice_Code}</if>
+        <if test="Invoice_Code==null">Invoice_Code IS NULL</if>
+        <if test="Invoice_Num!=null">AND Invoice_Num=#{Invoice_Num}</if>
+        <if test="Invoice_Num==null">AND Invoice_Num IS NULL</if>
+        <if test="Invoice_Date!=null">AND Invoice_Date=#{Invoice_Date}</if>
+        <if test="Invoice_Date==null">AND Invoice_Date IS NULL</if>
+        <if test="Check_Code!=null">AND Check_Code=#{Check_Code}</if>
+        <if test="Check_Code==null">AND Check_Code IS NULL</if>
+        <if test="Purchaser_Name!=null">AND Purchaser_Name=#{Purchaser_Name}</if>
+        <if test="Purchaser_Name==null">AND Purchaser_Name IS NULL</if>
+        <if test="Purchaser_Tax_Id!=null">AND Purchaser_Tax_Id=#{Purchaser_Tax_Id}</if>
+        <if test="Purchaser_Tax_Id==null">AND Purchaser_Tax_Id IS NULL</if>
+        <if test="Purchaser_Add_Tel!=null">AND Purchaser_Add_Tel=#{Purchaser_Add_Tel}</if>
+        <if test="Purchaser_Add_Tel==null">AND Purchaser_Add_Tel IS NULL</if>
+        <if test="Purchaser_Bank!=null">AND Purchaser_Bank=#{Purchaser_Bank}</if>
+        <if test="Purchaser_Bank==null">AND Purchaser_Bank IS NULL</if>
+        <if test="Seller_Name!=null">AND Seller_Name=#{Seller_Name}</if>
+        <if test="Seller_Name==null">AND Seller_Name IS NULL</if>
+        <if test="Seller_Tax_Id!=null">AND Seller_Tax_Id=#{Seller_Tax_Id}</if>
+        <if test="Seller_Tax_Id==null">AND Seller_Tax_Id IS NULL</if>
+        <if test="Seller_Add_Tel!=null">AND Seller_Add_Tel=#{Seller_Add_Tel}</if>
+        <if test="Seller_Add_Tel==null">AND Seller_Add_Tel IS NULL</if>
+        <if test="Seller_Bank!=null">AND Seller_Bank=#{Seller_Bank}</if>
+        <if test="Seller_Bank==null">AND Seller_Bank IS NULL</if>
+        AND abs(Total_Amount-#{Total_Amount}) &lt; 0.01
+        <if test="Image_Path!=null">AND Image_Path=#{Image_Path}</if>
+        <if test="Image_Path==null">AND Image_Path IS NULL</if>
+        AND abs(Detail_Amount-#{Detail_Amount}) &lt; 0.01
+        AND abs(Detail_Tax_Rate-#{Detail_Tax_Rate}) &lt; 0.01
+        AND abs(Detail_Tax-#{Detail_Tax}) &lt; 0.01
+
+        <if test="Detail_Item!=null">AND Detail_Item=#{Detail_Item}</if>
+        <if test="Detail_Item==null">AND Detail_Item IS NULL</if>
+    </delete>
+
+    <select id="findByElements" parameterType="mybatiscomponents.beans.Invoice" resultType="mybatiscomponents.beans.Detail">
+		SELECT
+		Detail_Item,
+		Detail_Amount,
+		Detail_Tax_Rate,
+		Detail_Tax
+
+		FROM
+
+		Invoice
+
+		<where>
+
+			<if test='Invoice_Code!=null'>
+				AND
+				Invoice_Code = #{Invoice_Code}
+			</if>
+
+			<if test='Invoice_Num!=null'>
+				AND
+				Invoice_Num = #{Invoice_Num}
+			</if>
+
+			<if test='Invoice_Date!=null'>
+				AND
+				Invoice_Date = #{Invoice_Date}
+			</if>
+
+          	<if test='Check_Code!=null'>
+              	AND
+                Check_Code = #{Check_Code}
+          	</if>
+
+        	<if test='Purchaser_Tax_Id!=null'>
+				AND
+				Purchaser_Tax_Id = #{Purchaser_Tax_Id}
+        	</if>
+
+			<if test='Purchaser_Name!=null'>
+				AND
+				Purchaser_Name = #{Purchaser_Name}
+            </if>
+
+            <if test='Purchaser_Add_Tel!=null'>
+                AND
+                Purchaser_Add_Tel = #{Purchaser_Add_Tel}
+            </if>
+
+            <if test='Purchaser_Bank!=null'>
+                AND
+                Purchaser_Bank = #{Purchaser_Bank}
+            </if>
+
+            <if test='Seller_Tax_Id!=null'>
+                AND
+                Seller_Tax_Id = #{Seller_Tax_Id}
+            </if>
+
+            <if test='Seller_Name!=null'>
+                AND
+                Seller_Name = #{Seller_Name}
+            </if>
+
+            <if test='Seller_Add_Tel!=null'>
+                AND
+                Seller_Add_Tel = #{Seller_Add_Tel}
+            </if>
+
+            <if test='Seller_Bank!=null'>
+                AND
+                Seller_Bank = #{Seller_Bank}
+            </if>
+
+            <if test="Image_Path!=null">
+                AND
+                Image_Path = #{Image_Path};
+            </if>
+
+		</where>
+
+
+
+
+    </select>
+
+
+    <select id="find" parameterType="mybatiscomponents.beans.Invoice" resultType="mybatiscomponents.beans.Detail">
+        SELECT
+        Detail_Item,
+        Detail_Amount,
+        Detail_Tax_Rate,
+        Detail_Tax
+
+        FROM
+
+        Invoice
+
+        WHERE
+        <if test="Invoice_Code!=null">Invoice_Code=#{Invoice_Code}</if>
+        <if test="Invoice_Code==null">Invoice_Code IS NULL</if>
+        <if test="Invoice_Num!=null">AND Invoice_Num=#{Invoice_Num}</if>
+        <if test="Invoice_Num==null">AND Invoice_Num IS NULL</if>
+        <if test="Invoice_Date!=null">AND Invoice_Date=#{Invoice_Date}</if>
+        <if test="Invoice_Date==null">AND Invoice_Date IS NULL</if>
+        <if test="Check_Code!=null">AND Check_Code=#{Check_Code}</if>
+        <if test="Check_Code==null">AND Check_Code IS NULL</if>
+        <if test="Purchaser_Name!=null">AND Purchaser_Name=#{Purchaser_Name}</if>
+        <if test="Purchaser_Name==null">AND Purchaser_Name IS NULL</if>
+        <if test="Purchaser_Tax_Id!=null">AND Purchaser_Tax_Id=#{Purchaser_Tax_Id}</if>
+        <if test="Purchaser_Tax_Id==null">AND Purchaser_Tax_Id IS NULL</if>
+        <if test="Purchaser_Add_Tel!=null">AND Purchaser_Add_Tel=#{Purchaser_Add_Tel}</if>
+        <if test="Purchaser_Add_Tel==null">AND Purchaser_Add_Tel IS NULL</if>
+        <if test="Purchaser_Bank!=null">AND Purchaser_Bank=#{Purchaser_Bank}</if>
+        <if test="Purchaser_Bank==null">AND Purchaser_Bank IS NULL</if>
+        <if test="Seller_Name!=null">AND Seller_Name=#{Seller_Name}</if>
+        <if test="Seller_Name==null">AND Seller_Name IS NULL</if>
+        <if test="Seller_Tax_Id!=null">AND Seller_Tax_Id=#{Seller_Tax_Id}</if>
+        <if test="Seller_Tax_Id==null">AND Seller_Tax_Id IS NULL</if>
+        <if test="Seller_Add_Tel!=null">AND Seller_Add_Tel=#{Seller_Add_Tel}</if>
+        <if test="Seller_Add_Tel==null">AND Seller_Add_Tel IS NULL</if>
+        <if test="Seller_Bank!=null">AND Seller_Bank=#{Seller_Bank}</if>
+        <if test="Seller_Bank==null">AND Seller_Bank IS NULL</if>
+        AND abs(Total_Amount-#{Total_Amount}) &lt; 0.01
+        <if test="Image_Path!=null">AND Image_Path=#{Image_Path}</if>
+        <if test="Image_Path==null">AND Image_Path IS NULL</if>
+        AND abs(Detail_Amount-#{Detail_Amount}) &lt; 0.01
+        AND abs(Detail_Tax_Rate-#{Detail_Tax_Rate}) &lt; 0.01
+        AND abs(Detail_Tax-#{Detail_Tax}) &lt; 0.01
+
+        <if test="Detail_Item!=null">AND Detail_Item=#{Detail_Item}</if>
+        <if test="Detail_Item==null">AND Detail_Item IS NULL</if>
+
+
+
+
+    </select>
+
+</mapper>

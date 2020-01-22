@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatiscomponents.mapper.AllInvoiceInfoMapper">
+    <resultMap id="AllInvoiceInfoResultMap" type="mybatiscomponents.beans.AllInvoiceInfo">
+        <id property="Invoice_Code" column="Invoice_Code"/>
+        <id property="Invoice_Num" column="Invoice_Num"/>
+        <id property="Invoice_Date" column="Invoice_Date"/>
+        <id property="Check_Code" column="Check_Code"/>
+        <id property="Total_Amount" column="Total_Amount"/>
+        <id property="Image_Path" column="Image_Path"/>
+		<id property="Purchaser_Tax_Id" column="Purchaser_Tax_Id"/>
+		<id property="Purchaser_Name" column="Purchaser_Name"/>
+		<id property="Purchaser_Add_Tel" column="Purchaser_Add_Tel"/>
+		<id property="Purchaser_Bank" column="Purchaser_Bank"/>
+		<id property="Seller_Tax_Id" column="Seller_Tax_Id"/>
+		<id property="Seller_Name" column="Seller_Name"/>
+		<id property="Seller_Add_Tel" column="Seller_Add_Tel"/>
+		<id property="Seller_Bank" column="Seller_Bank"/>
+        <collection property="details" ofType="mybatiscomponents.beans.Detail">
+			<id property="Detail_Item" column="Detail_Item"/>
+            <id property="Detail_Amount" column="Detail_Amount"/>
+            <id property="Detail_Tax_Rate" column="Detail_Tax_Rate"/>
+            <id property="Detail_Tax" column="Detail_Tax"/>
+
+        </collection>
+
+    </resultMap>
+
+
+    <select id="findByElements" parameterType="mybatiscomponents.beans.Invoice"
+            resultMap="AllInvoiceInfoResultMap">
+		SELECT Invoice_Code,
+		Invoice_Num,
+		Invoice_Date,
+		Check_Code,
+		Purchaser_Name,
+		Purchaser_Tax_Id,
+		Purchaser_Add_Tel,
+		Purchaser_Bank,
+		Seller_Name,
+		Seller_Tax_Id,
+		Seller_Add_Tel,
+		Seller_Bank,
+		Total_Amount,
+		Detail_Item,
+		Detail_Amount,
+		Detail_Tax_Rate,
+		Detail_Tax,
+		Image_Path
+
+		FROM
+		Invoice
+
+		<where>
+
+			<if test='Invoice_Code!=null'>
+				AND
+				Invoice_Code like '%'+#{Invoice_Code}+'%'
+			</if>
+
+			<if test='Invoice_Num!=null'>
+				AND
+				Invoice_Num like '%'+#{Invoice_Num}+'%'
+			</if>
+
+			<if test='Invoice_Date!=null'>
+				AND
+				Invoice_Date like '%'+#{Invoice_Date}+'%'
+			</if>
+
+			<if test='Check_Code!=null'>
+				AND
+				Check_Code like '%'+#{Check_Code}+'%'
+			</if>
+
+			<if test='Total_Amount!=null and Total_Amount!=-1 ' >
+				AND
+				abs(Total_Amount - #{Total_Amount}) &lt; 0.01
+			</if>
+
+
+			<if test='Purchaser_Tax_Id!=null'>
+				AND
+				Purchaser_Tax_Id like '%'+#{Purchaser_Tax_Id}+'%'
+			</if>
+
+			<if test='Purchaser_Name!=null'>
+				AND
+				Purchaser_Name like '%'+#{Purchaser_Name}+'%'
+			</if>
+
+			<if test='Purchaser_Add_Tel!=null'>
+				AND
+				Purchaser_Add_Tel like '%'+#{Purchaser_Add_Tel}+'%'
+			</if>
+
+			<if test='Purchaser_Bank!=null'>
+				AND
+				Purchaser_Bank like '%'+#{Purchaser_Bank}+'%'
+			</if>
+
+			<if test='Seller_Tax_Id!=null'>
+				AND
+				Seller_Tax_Id like '%'+#{Seller_Tax_Id}+'%'
+			</if>
+
+			<if test='Seller_Name!=null'>
+				AND
+				Seller_Name like '%'+#{Seller_Name}+'%'
+			</if>
+
+			<if test='Seller_Add_Tel!=null'>
+				AND
+				Seller_Add_Tel like '%'+#{Seller_Add_Tel}+'%'
+			</if>
+
+			<if test='Seller_Bank!=null'>
+				AND
+				Seller_Bank like '%'+#{Seller_Bank}+'%'
+			</if>
+
+
+			<if test='Detail_Item!=null'>
+				AND
+				Detail.Detail_Item like '%'+#{Detail_Item}+'%'
+			</if>
+
+			<if test='Detail_Amount!=null and Detail_Amount!=-1'>
+				AND
+				abs(Detail.Detail_Amount -#{Detail_Amount}) &lt; 0.3
+			</if>
+
+			<if test='Detail_Tax!=null and Detail_Tax!=-1'>
+		  		AND
+				abs(Detail.Detail_Tax -#{Detail_Tax}) &lt; 0.01
+			</if>
+
+			<if test='Detail_Tax_Rate!=null and Detail_Tax_Rate!=-1'>
+				AND
+				Detail_Tax_Rate = #{Detail_Tax_Rate}
+			</if>
+		</where>
+
+
+
+
+    </select>
+
+</mapper>

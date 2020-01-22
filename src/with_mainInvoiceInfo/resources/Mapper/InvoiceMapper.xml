@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->
+<mapper namespace="mybatiscomponents.mapper.InvoiceMapper">
+    <insert id="insert" parameterType="mybatiscomponents.beans.Invoice">
+        INSERT INTO Invoice(Invoice_Code,
+			Invoice_Num,
+			Invoice_Date,
+			Check_Code,
+			Purchaser_Name,
+			Purchaser_Tax_Id,
+			Purchaser_Add_Tel,
+			Purchaser_Bank,
+			Seller_Name,
+			Seller_Tax_Id,
+			Seller_Add_Tel,
+			Seller_Bank,
+			Total_Amount,
+			Detail_Item,
+			Detail_Amount,
+			Detail_Tax_Rate,
+			Detail_Tax,
+			Image_Path)
+        VALUES
+            (#{Invoice_Code},
+			#{Invoice_Num},
+			#{Invoice_Date},
+			#{Check_Code},
+			#{Purchaser_Name},
+			#{Purchaser_Tax_Id},
+			#{Purchaser_Add_Tel},
+			#{Purchaser_Bank},
+			#{Seller_Name},
+			#{Seller_Tax_Id},
+			#{Seller_Add_Tel},
+			#{Seller_Bank},
+			#{Total_Amount},
+			#{Detail_Item},
+			#{Detail_Amount},
+			#{Detail_Tax_Rate},
+			#{Detail_Tax},
+			#{Image_Path);
+    </insert>
+
+    <update id="update" parameterType="mybatiscomponents.beans.Invoice">
+        IF EXISTS (
+          SELECT * FROM Invoice
+          WHERE Invoice_Code=#{Invoice_Code}
+          AND Invoice_Num=#{Invoice_Num}
+          AND Invoice_Date=#{Invoice_Date}
+          AND Check_Code=#{Check_Code}
+		  AND Purchaser_Name=#{Purchaser_Name}
+		  AND Purchaser_Tax_Id=#{Purchaser_Tax_Id}
+		  AND Purchaser_Add_Tel=#{Purchaser_Add_Tel}
+		  AND Purchaser_Bank=#{Purchaser_Bank}
+		  AND Seller_Name=#{Seller_Name}
+		  AND Seller_Tax_Id=#{Seller_Tax_Id}
+		  AND Seller_Add_Tel=#{Seller_Add_Tel}
+		  AND Seller_Bank=#{Seller_Bank}
+		  AND Total_Amount=#{Total_Amount}
+		  AND Detail_Item=#{Detail_Item}
+		  AND Detail_Amount=#{Detail_Amount}
+		  AND Detail_Tax_Rate=#{Detail_Tax_Rate}
+		  AND Detail_Tax=#{Detail_Tax}
+		  AND Image_Path=#{Image_Path}
+          )
+            UPDATE Invoice SET
+            Invoice_Code=#{Invoice_Code},
+            Invoice_Num=#{Invoice_Num},
+            Invoice_Date=#{Invoice_Date},
+            Check_Code=#{Check_Code},
+ 		    Purchaser_Name=#{Purchaser_Name},
+ 		    Purchaser_Tax_Id=#{Purchaser_Tax_Id},
+ 		    Purchaser_Add_Tel=#{Purchaser_Add_Tel},
+ 		    Purchaser_Bank=#{Purchaser_Bank},
+ 		    Seller_Name=#{Seller_Name},
+ 		    Seller_Tax_Id=#{Seller_Tax_Id},
+ 		    Seller_Add_Tel=#{Seller_Add_Tel},
+ 		    Seller_Bank=#{Seller_Bank},
+ 		    Total_Amount=#{Total_Amount},
+ 		    Detail_Item=#{Detail_Item},
+ 		    Detail_Amount=#{Detail_Amount},
+ 		    Detail_Tax_Rate=#{Detail_Tax_Rate},
+ 		    Detail_Tax=#{Detail_Tax},
+ 		    Image_Path=#{Image_Path}
+            WHERE Invoice_Code=#{Invoice_Code}
+            AND Invoice_Num=#{Invoice_Num}
+            AND Invoice_Date=#{Invoice_Date}
+            AND Check_Code=#{Check_Code}
+		    AND Purchaser_Name=#{Purchaser_Name}
+		    AND Purchaser_Tax_Id=#{Purchaser_Tax_Id}
+		    AND Purchaser_Add_Tel=#{Purchaser_Add_Tel}
+		    AND Purchaser_Bank=#{Purchaser_Bank}
+		    AND Seller_Name=#{Seller_Name}
+		    AND Seller_Tax_Id=#{Seller_Tax_Id}
+		    AND Seller_Add_Tel=#{Seller_Add_Tel}
+		    AND Seller_Bank=#{Seller_Bank}
+		    AND Total_Amount=#{Total_Amount}
+		    AND Detail_Item=#{Detail_Item}
+		    AND Detail_Amount=#{Detail_Amount}
+		    AND Detail_Tax_Rate=#{Detail_Tax_Rate}
+		    AND Detail_Tax=#{Detail_Tax}
+		    AND Image_Path=#{Image_Path};
+        ELSE
+            INSERT INTO Invoice(Invoice_Code,
+			Invoice_Num,
+			Invoice_Date,
+			Check_Code,
+			Purchaser_Name,
+			Purchaser_Tax_Id,
+			Purchaser_Add_Tel,
+			Purchaser_Bank,
+			Seller_Name,
+			Seller_Tax_Id,
+			Seller_Add_Tel,
+			Seller_Bank,
+			Total_Amount,
+			Detail_Item,
+			Detail_Amount,
+			Detail_Tax_Rate,
+			Detail_Tax,
+			Image_Path)
+            VALUES
+            (#{Invoice_Code},
+			#{Invoice_Num},
+			#{Invoice_Date},
+			#{Check_Code},
+			#{Purchaser_Name},
+			#{Purchaser_Tax_Id},
+			#{Purchaser_Add_Tel},
+			#{Purchaser_Bank},
+			#{Seller_Name},
+			#{Seller_Tax_Id},
+			#{Seller_Add_Tel},
+			#{Seller_Bank},
+			#{Total_Amount},
+			#{Detail_Item},
+			#{Detail_Amount},
+			#{Detail_Tax_Rate},
+			#{Detail_Tax},
+			#{Image_Path);
+
+    </update>
+
+    <delete id="delete" parameterType="mybatiscomponents.beans.Invoice">
+        DELETE FROM Invoice
+        WHERE Invoice_Code=#{Invoice_Code}
+            AND Invoice_Num=#{Invoice_Num}
+            AND Invoice_Date=#{Invoice_Date}
+            AND Check_Code=#{Check_Code}
+		    AND Purchaser_Name=#{Purchaser_Name}
+		    AND Purchaser_Tax_Id=#{Purchaser_Tax_Id}
+		    AND Purchaser_Add_Tel=#{Purchaser_Add_Tel}
+		    AND Purchaser_Bank=#{Purchaser_Bank}
+		    AND Seller_Name=#{Seller_Name}
+		    AND Seller_Tax_Id=#{Seller_Tax_Id}
+		    AND Seller_Add_Tel=#{Seller_Add_Tel}
+		    AND Seller_Bank=#{Seller_Bank}
+		    AND Total_Amount=#{Total_Amount}
+		    AND Detail_Item=#{Detail_Item}
+		    AND Detail_Amount=#{Detail_Amount}
+		    AND Detail_Tax_Rate=#{Detail_Tax_Rate}
+		    AND Detail_Tax=#{Detail_Tax}
+		    AND Image_Path=#{Image_Path};
+
+    </delete>
+
+</mapper>
